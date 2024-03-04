@@ -26,12 +26,14 @@ df_list = [maj_aquifer_df, min_aquifer_df, subbasin_df, precip_df, rivers_df, ri
            floodplan_df]
 
 for x in df_list:
-    print(str(df_list), str(df_list.crs))
+    print(x, str(x.crs))
 """
 Plotting
 """
+fig, ax = plt.subplots(figsize=(15,15))
 
-# rivers_df.plot(alpha=0.2, color="blue")
-# river_basins_df.plot(alpha=0.2, color="cyan")
+reservoirs_df.plot(alpha=0.2, color="indigo", ax=ax)
+rivers_df.plot(alpha=0.2, color="blue", ax=ax)
+river_basins_df.plot(alpha=0.2, color="cyan", ax=ax)
 # plt.legend()
-# plt.show()
+plt.show()

@@ -34,12 +34,13 @@ fig, ax = plt.subplots(figsize=(15,15))
 
 # reservoirs_df.plot(alpha=0.2, color="indigo", ax=ax)  # Different projection
 # min_aquifer_df.plot(alpha=0.2, color="green", ax=ax) # Probably a different projection
+# groundwater_df.plot(alpha=0.2, color="lavender", ax=ax)
 
 
 maj_aquifer_df.plot(alpha=0.2, color="green", ax=ax)
 subbasin_df.plot(alpha=0.2, color="indigo", ax=ax)
 rivers_df.plot(alpha=0.2, color="blue", ax=ax)
 river_basins_df.plot(alpha=0.2, color="cyan", ax=ax)
-groundwater_df.plot(alpha=0.2, color="lilac", ax=ax)
+precip_df.plot(alpha=0.2, color="lavender", ax=ax)
 # plt.legend()
 plt.show()

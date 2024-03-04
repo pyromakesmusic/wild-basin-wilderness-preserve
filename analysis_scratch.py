@@ -30,7 +30,10 @@ for x in df_list:
 """
 Plotting
 """
-fig, ax = plt.subplots(figsize=(15,15))
+fig = plt.figure(figsize=(15,15), facecolor="gray")
+
+ax = plt.axes()
+ax.set_facecolor("gray")
 
 # reservoirs_df.plot(alpha=0.2, color="indigo", ax=ax)  # Different projection
 # min_aquifer_df.plot(alpha=0.2, color="green", ax=ax) # Probably a different projection

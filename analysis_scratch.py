@@ -32,7 +32,11 @@ Plotting
 """
 fig, ax = plt.subplots(figsize=(15,15))
 
-reservoirs_df.plot(alpha=0.2, color="indigo", ax=ax)
+# reservoirs_df.plot(alpha=0.2, color="indigo", ax=ax)  # Different projection
+
+maj_aquifer_df.plot(alpha=0.2, color="green", ax=ax)
+min_aquifer_df.plot(alpha=0.2, color="green", ax=ax)
+subbasin_df.plot(alpha=0.2, color="indigo", ax=ax)
 rivers_df.plot(alpha=0.2, color="blue", ax=ax)
 river_basins_df.plot(alpha=0.2, color="cyan", ax=ax)
 # plt.legend()

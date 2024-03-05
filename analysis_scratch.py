@@ -22,6 +22,8 @@ reservoirs_df = gpd.read_file(r"data\existing_reservoirs\TWDB_SWP2012_Major_Rese
 groundwater_df = gpd.read_file(r"data\TWDB_Groundwater\TWDB_Groundwater.shp")  # Groundwater file
 floodplan_df = gpd.read_file(r"data\Regional_Flood_Planning_Groups\Regional_Flood_Planning_Groups.shp")  # Flood planning file
 
+wildlife_df = gpd.read_file(r"data\WildlifeManagementAreas\WildlifeManagementAreas.shp")
+
 df_list = [maj_aquifer_df, min_aquifer_df, subbasin_df, precip_df, rivers_df, river_basins_df, reservoirs_df, groundwater_df,
            floodplan_df]
 
@@ -45,5 +47,7 @@ subbasin_df.plot(alpha=0.2, color="indigo", ax=ax)
 rivers_df.plot(alpha=0.2, color="blue", ax=ax)
 river_basins_df.plot(alpha=0.2, color="cyan", ax=ax)
 precip_df.plot(alpha=0.2, color="lavender", ax=ax)
+
+wildlife_df.plot(alpha=0.2, color="red", ax=ax)
 # plt.legend()
 plt.show()

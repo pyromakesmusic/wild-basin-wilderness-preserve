@@ -22,7 +22,9 @@ reservoirs_df = gpd.read_file(r"data\existing_reservoirs\TWDB_SWP2012_Major_Rese
 groundwater_df = gpd.read_file(r"data\TWDB_Groundwater\TWDB_Groundwater.shp")  # Groundwater file
 floodplan_df = gpd.read_file(r"data\Regional_Flood_Planning_Groups\Regional_Flood_Planning_Groups.shp")  # Flood planning file
 
-wildlife_df = gpd.read_file(r"data\WildlifeManagementAreas\WildlifeManagementAreas.shp")
+wildlife_df = gpd.read_file(r"data\WildlifeManagementAreas\WildlifeManagementAreas.shp")  # WIldlife shapefile
+
+geology_df = gpd.read_file(r"data\Tx_GeologyGeneral_USGS\Tx_GeologyGeneral_USGS.shp")  # Geology shapefile
 
 df_list = [maj_aquifer_df, min_aquifer_df, subbasin_df, precip_df, rivers_df, river_basins_df, reservoirs_df, groundwater_df,
            floodplan_df]

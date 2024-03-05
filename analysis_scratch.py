@@ -50,6 +50,7 @@ rivers_df.plot(alpha=0.2, color="blue", ax=ax)
 river_basins_df.plot(alpha=0.2, color="cyan", ax=ax)
 precip_df.plot(alpha=0.2, color="lavender", ax=ax)
 
+geology_df.plot(alpha=0.2, color="black", ax=ax)
 wildlife_df.plot(alpha=0.2, color="red", ax=ax)
 # plt.legend()
 plt.show()

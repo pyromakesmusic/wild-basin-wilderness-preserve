@@ -7,10 +7,17 @@ Description: Some early exploration of geographic data related to the Wild Basin
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import geopandas as gpd
+from shapely.geometry import Point
 
 """
 Reading in Shapefiles
 """
+
+PRESERVE_LATITUDE = 30.310278
+PRESERVE_LONGITUDE = -97.823333
+LOCATION = Point(PRESERVE_LATITUDE, PRESERVE_LONGITUDE)
+
+loc_df = gpd.GeoDataFrame(geometry=LOCATION)
 
 maj_aquifer_df = gpd.read_file(r"data\major_aquifers\NEW_major_aquifers_dd.shp")  # Major aquifer file
 min_aquifer_df = gpd.read_file(r"data\minor_aquifers\Minor_Aquifers.shp")  # Minor aquifer file
@@ -26,6 +33,8 @@ wildlife_df = gpd.read_file(r"data\WildlifeManagementAreas\WildlifeManagementAre
 
 geology_df = gpd.read_file(r"data\Tx_GeologyGeneral_USGS\Tx_GeologyGeneral_USGS.shp")  # Geology shapefile
 
+parks_df = gpd.read_file(r"data\Tx_StateParks_STRATMAP\Tx_StateParks_STRATMAP.shp")
+
 df_list = [maj_aquifer_df, min_aquifer_df, subbasin_df, precip_df, rivers_df, river_basins_df, reservoirs_df, groundwater_df,
            floodplan_df]
 
@@ -34,15 +43,16 @@ for x in df_list:
 """
 Plotting
 """
-fig = plt.figure(figsize=(15,15), facecolor="gray")
+fig = plt.figure(figsize=(15,15), facecolor="ivory")
 
 ax = plt.axes()
-ax.set_facecolor("gray")
+ax.set_facecolor("ivory")
 
 # reservoirs_df.plot(alpha=0.2, color="indigo", ax=ax)  # Different projection
 # min_aquifer_df.plot(alpha=0.2, color="green", ax=ax) # Probably a different projection
 # groundwater_df.plot(alpha=0.2, color="lavender", ax=ax)
 
+loc_df.plot(color="white", ax=ax)
 
 maj_aquifer_df.plot(alpha=0.2, color="green", ax=ax)
 subbasin_df.plot(alpha=0.2, color="indigo", ax=ax)
@@ -52,5 +62,7 @@ precip_df.plot(alpha=0.2, color="lavender", ax=ax)
 
 geology_df.plot(alpha=0.2, color="black", ax=ax)
 wildlife_df.plot(alpha=0.2, color="red", ax=ax)
+
+parks_df.plot(alpha=0.2, color="orange", ax=ax)
 # plt.legend()
 plt.show()

@@ -19,12 +19,14 @@ LOCATION = Point(PRESERVE_LATITUDE, PRESERVE_LONGITUDE)
 
 # loc_df = gpd.GeoDataFrame(geometry=[LOCATION], crs="EPSG:4326").to_crs(epsg=4269)
 #
-# maj_aquifer_df = gpd.read_file(r"data\major_aquifers\NEW_major_aquifers_dd.shp")  # Major aquifer file
-# min_aquifer_df = gpd.read_file(r"data\minor_aquifers\Minor_Aquifers.shp", crs="EPSG:7019")  # Minor aquifer file
+maj_aquifer_df = gpd.read_file(r"data\major_aquifers\NEW_major_aquifers_dd.shp")  # Major aquifer file
+min_aquifer_df = gpd.read_file(r"data\minor_aquifers\Minor_Aquifers.shp")  # Minor aquifer file
+
 # subbasin_df = gpd.read_file(r"data\USGS_HUC_8_Shapefile\USGS_HUC_8_Subbasin.shp")  # Subbasin file
 precip_df = gpd.read_file(r"data\Precipitation_Shapefile\TX_Precip_1981_2010_NRCS.shp")  # Precipitation file
-# rivers_df = gpd.read_file(r"data\Major_Rivers_dd83\MajorRivers_dd83.shp")  # Rivers file
-# river_basins_df = gpd.read_file(r"data\Major_River_Basins_Shapefile\TWDB_MRBs_2014.shp")  # River basins file
+rivers_df = gpd.read_file(r"data\Major_Rivers_dd83\MajorRivers_dd83.shp")  # Rivers file
+river_basins_df = gpd.read_file(r"data\Major_River_Basins_Shapefile\TWDB_MRBs_2014.shp")  # River basins file
+
 # reservoirs_df = gpd.read_file(r"data\existing_reservoirs\TWDB_SWP2012_Major_Reservoirs.shp", crs="EPSG:7019")  # Reservoirs file
 groundwater_df = gpd.read_file(r"data\TWDB_Groundwater\TWDB_Groundwater.shp")  # Groundwater file
 floodplan_df = gpd.read_file(r"data\Regional_Flood_Planning_Groups\Regional_Flood_Planning_Groups.shp")  # Flood planning file
@@ -54,20 +56,25 @@ Data Processing
 Plotting
 """
 
-fig, ax = plt.subplots(figsize=(15,15))
-ax.set_facecolor("indigo")
+fig, ax = plt.subplots(figsize=(30,15))
+ax.set_facecolor("white")
 
 # reservoirs_df.plot(column="STATUS", alpha=0.5, ax=ax, legend=True, label="Reservoirs")  # Different projection
-# min_aquifer_df.plot(alpha=0.2, color="green", ax=ax) # Probably a different projection
+
 # groundwater_df.plot(alpha=0.4, column="WaterQuali", ax=ax, label="Groundwater")
 
 # loc_df.plot(color="white", ax=ax)
 # print(maj_aquifer_df.columns)
 
-# maj_aquifer_df.plot(alpha=0.7, color="green", ax=ax, legend=True, label="Major Aquifers")
+min_aquifer_df.to_crs(epsg=4269, inplace=True)
+maj_aquifer_df.to_crs(epsg=4269, inplace=True)
+
+maj_aquifer_df.plot(alpha=0.4, column="AQUIFER", ax=ax, legend=True, label="Major Aquifers")
+min_aquifer_df.plot(column="AQUIFER", alpha=0.4, ax=ax, legend=True, label="Minor Aquifers") # Probably a different projection
+
 # subbasin_df.plot(alpha=0.1, color="indigo", ax=ax, legend=True)
-# rivers_df.plot(column="METERS", alpha=0.4, ax=ax, legend=True, label="Rivers")
-# river_basins_df.plot(alpha=0.2, color="cyan", ax=ax, legend=True)
+rivers_df.plot(column="METERS", alpha=0.4, ax=ax, legend=True, label="Rivers")
+river_basins_df.plot(alpha=0.4, color="cyan", ax=ax, legend=True)
 # precip_df.plot(alpha=0.1, color="lavender", ax=ax, legend=True)
 #
 # geology_df.plot(alpha=0.1, color="black", ax=ax, legend=True)
@@ -78,9 +85,9 @@ ax.set_facecolor("indigo")
 
 
 # precip_df.describe()
-precip_df.plot(column="Inches", alpha=0.5, label="Precipitation (inches)", legend=True, ax=ax)
-groundwater_df.plot(column="WaterQuali", alpha=0.5, label="Groundwater Quality", legend=True, ax=ax, s=0.3)
-floodplan_df.plot(alpha=0.3, label="Flood Plan", legend=True, ax=ax)
+#precip_df.plot(column="Inches", alpha=0.5, label="Precipitation (inches)", legend=True, ax=ax)
+#groundwater_df.plot(column="WaterQuali", alpha=0.7, label="Groundwater Quality", legend=True, ax=ax, s=0.3)
+# floodplan_df.plot(column="RFPG", alpha=0.3, label="Flood Plan", legend=True, ax=ax)
 # groundwater_df.plot(x="Elevation", y="WellDepth", kind="scatter", s=1, alpha=0.1, title="Elevation vs. Well Depth", ax=ax)
 
 # groundwater_df.plot(x="WaterQuali", kind="bar")
@@ -92,16 +99,26 @@ floodplan_df.plot(alpha=0.3, label="Flood Plan", legend=True, ax=ax)
 
 
 # Create custom legends
-# handles, labels = ax.get_legend_handles_labels()
-# ax.legend(handles, labels, title='One legend', loc='upper left')
+handles, labels = ax.get_legend_handles_labels()
+ax.legend(handles, labels, title='One legend', loc='upper left', bbox_to_anchor=(1, 1))
 
 # Create additional legend manually
 # Adjust the bbox_to_anchor parameter to position the legend as desired
-# ax.legend(title='Another legend', loc='upper right', bbox_to_anchor=(1.05, 3))
+print(maj_aquifer_df.columns, maj_aquifer_df.describe())
+print(maj_aquifer_df.total_bounds)
+print(maj_aquifer_df.crs)
+print(min_aquifer_df.total_bounds)
+print(min_aquifer_df.crs)
+print(river_basins_df.total_bounds)
+print(river_basins_df.crs)
+#
+ax.set_xlim(-108, -92)  # Set x-axis limits
+ax.set_ylim(25, 37.5)  # Set y-axis limits
 plt.show()
 """
 Console Output
 """
-floodplan_df.describe()
-print(floodplan_df.columns)
-print(floodplan_df.describe())
+# floodplan_df.describe()
+# print(floodplan_df.columns)
+# print(floodplan_df.describe())
+
